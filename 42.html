@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мяу</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-image: url('images/kotik.gif'); /* Ваш GIF */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f8ff;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden; /* Убирает полосы прокрутки */
+      position: relative; /* Для вложенных элементов */
+    }
+   
+    h1 {
+      font-size: 36px;
+      color: white;
+      margin: 0;
+      animation: fadeInText 3s ease-in-out;
+    }
+    p {
+      font-size: 20px;
+      color: white;
+      animation: fadeInText 4s ease-in-out;
+    }
+    .button {
+      display: inline-block;
+      padding: 20px 40px;
+      background-color: #ffb6c1; /* Светло-розовый цвет кнопки */
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 50px; /* Более круглые углы */
+      font-size: 20px;
+      font-family: 'Verdana', sans-serif;
+      width: auto;
+      height: auto;
+      border: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1; /* Контент ниже цветочков */
+      animation: pulse 2s infinite; /* Пульсация */
+      margin-left: -20px; /* Подвинуть кнопку левее */
+    }
+    .button:hover {
+      background-color: rgba(255, 182, 193, 0.7);
+      transform: scale(1.1);
+    }
+
+    /* Анимация пульсации кнопки */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Анимация для цветочков с постепенным растворением */
+    @keyframes flowerAnimation {
+      0% {
+        opacity: 1;
+        transform: translateY(-100px) scale(1.5);
+      }
+      70% {
+        opacity: 1;
+        transform: translateY(calc(70vh)) scale(1.5);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(100vh) scale(1.5);
+      }
+    }
+
+    .flower {
+      position: absolute;
+      width: 60px; /* Размер цветочка */
+      height: 60px;
+      background-image: url('images/kvetka.png'); /* Ваши цветочки */
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: flowerAnimation 5s infinite linear;
+      z-index: 2; /* Цветочки поверх контента */
+    }
+    
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1> </h1>
+    <p> </p>
+    <a href="slideshow.html" class="button">Тык сюда</a>
+  </div>
+
+  <!-- Цветочки -->
+  <script>
+    // Количество цветочков, которые появятся на экране
+    const numFlowers = 15;
+
+    function createFlowers() {
+      for (let i = 0; i < numFlowers; i++) {
+        let flower = document.createElement('div');
+        flower.classList.add('flower');
+        
+        // Случайная позиция по оси X
+        flower.style.left = Math.random() * window.innerWidth + 'px';
+        // Случайная начальная позиция по оси Y в диапазоне от -50 до -250 пикселей
+        flower.style.top = (-50 - Math.random() * 200) + 'px';
+        // Добавляем случайную задержку анимации
+        flower.style.animationDelay = Math.random() * 5 + 's';
+        // Устанавливаем случайную продолжительность анимации (от 5 до 10 секунд)
+        flower.style.animationDuration = Math.random() * 5 + 5 + 's';
+        
+        document.body.appendChild(flower);
+      }
+    }
+
+    createFlowers();
+  </script>
+
+</body>
+</html>
